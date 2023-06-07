@@ -14,6 +14,19 @@ const showAutos = (req, res) => {
     })
 };
 
+const showAuto = (req, res) => {
+    const consulta = autosModel.find()
+    .populate('make') // Populate, nos muestra el documento Relacionado
+
+    consulta.exec()
+    .then((autos) => {
+        res.json(autos);
+    })
+    .catch((error) => {
+        res.json({'message': error})
+    })
+};
+
 const addAuto = async (req, res) => {
     const { make, model, version, price, imagen } = req.body;
     const makeObj = await makeModel.findById({_id: make});
@@ -21,13 +34,7 @@ const addAuto = async (req, res) => {
     if (!makeObj) {
         return res.status(400).json({ error: 'Make no encontrado' });
       }
-      const auto = new autosModel({
-        make: makeObj,
-        model,
-        version,
-        price,
-        imagen
-      } )
+      const auto = new autosModel({make: makeObj,model, version, price,imagen})
 
     auto.save()
     .then((resultado) => {
@@ -79,4 +86,4 @@ const updateCar = (req, res) => {
     })
 };
 
-export { showAutos , addAuto, updateCar, deleteAuto ,deleteAutoV2 }
+export { showAutos ,showAuto, addAuto, updateCar, deleteAuto ,deleteAutoV2 }
