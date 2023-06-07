@@ -1,10 +1,10 @@
 import mongoose from 'mongoose'
 
-const uri = "Aqui va tu URI"
+const uri = "mongodb+srv://lozanojoel35:Admin1234@cluster0.pdspawj.mongodb.net/AutosDB"
 
 const options = {
     autoIndex: true,
-    serverSelectionTimeoutMS: 5000
+    serverSelectionTimeoutMS: 5000,
 }
 
 const execute = () => {
