@@ -7,7 +7,8 @@ const showAutos = (req, res) => {
 
     consulta.exec()
     .then((autos) => {
-        res.json(autos);
+       // res.json(autos)
+        res.render('index', {autos})
     })
     .catch((error) => {
         res.json({'message': error})
