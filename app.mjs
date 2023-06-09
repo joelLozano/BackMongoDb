@@ -10,6 +10,7 @@ app.use(autosRoute)
 app.use(usersRoutes)
 app.use(makesRoutes)
 app.set('view engine', 'ejs') // indicamos que lanzara una vista con ejs
+//app.set("views", "./src/views") // indicamos la ruta de las vistas
 
 execute()
 app.listen(3000, () => {
