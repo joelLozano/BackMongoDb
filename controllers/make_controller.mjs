@@ -13,9 +13,9 @@ const showMakes = (req, res) => {
 };
 
 const addMake = (req, res) => {
-    const { make, sucursal, contacto, address } = req.body
-    console.log(contacto.phone)
-    const makesObject = new makeSchema({ make, sucursal, contacto, address })
+    const { make, sucursal, contact, address } = req.body
+    //console.log(contact.phone)
+    const makesObject = new makeSchema({ make, sucursal, contact, address })
 
     makesObject.save()
     .then((resultado) => {
