@@ -4,9 +4,8 @@ import bcrypt from 'bcrypt';
 const Schema = _Schema
 
 const user = new Schema ({
-    unserName: {
+    username: {
         type: String,
-        unique: true
     },
     email: {
         type: String,

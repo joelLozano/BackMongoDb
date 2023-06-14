@@ -14,10 +14,11 @@ const verificar = async (req, res, next) => {
 
     // crear una consulta por ID 
     const user = await User.findById(decoded.id, {password: 0})
-    if (!user) return res.status(404).json({message: 'User not found'})
 
+    if (!user) return res.status(404).json({message: 'User not found'})
     console.log(user);
     next();
+    
  } catch (error) {
     res.json({message: 'token no valido'})
  }

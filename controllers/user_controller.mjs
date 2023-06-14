@@ -15,12 +15,14 @@ const createUser = async (req, res) => {
         rol
     })
 
-    await newUser.save()
-    .then((resultado) => {
-        res.json({message: resultado})
-    }).catch((error) => {
-        res.json({message: error})
+    const saveuser =  await newUser.save()
+
+    const token = Jwt.sign({id: saveuser._id}, SECRET, {
+        expiresIn: 50000
     })
+
+    res.status(200).json({token})
+   
 };
 
 const login = async (req, res) => {
