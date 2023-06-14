@@ -1,5 +1,7 @@
+import Jwt from "jsonwebtoken";
 import User from "../model/user_model.mjs";
 import { encryptPassword, comparePassword } from "../model/user_model.mjs";
+import { SECRET } from "../config/config.mjs";
 
 const createUser = async (req, res) => {
     const { username, email, password, nombre,apePaterno, rol } = req.body
@@ -29,11 +31,14 @@ const login = async (req, res) => {
     // comparar el password 
 
     const passwordCompare = await comparePassword(req.body.password, userFound.password)
-    console.log("retorno BD = ",passwordCompare);
     if (!passwordCompare) return res.status(401).json({message: 'invalid password'})
 
-    res.json({message: 'WElcome '+ userFound.nombre})
+    // Generar un Token 
+    const token = Jwt.sign({id: userFound._id}, SECRET, {
+        expiresIn: 50000
+    })
 
+    res.json({token})
 }
 
 export {createUser, login}
