@@ -4,7 +4,7 @@ import 'dotenv/config'
 
 const configuration = new Configuration({
     organization: "org-0YC7WZLhzP0Gva25eOWQoGhC",
-    apiKey: "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"
+    apiKey: "aqui va tu APIKEY"
 });
 const openai = new OpenAIApi(configuration);
 const completion = await openai.createChatCompletion({
