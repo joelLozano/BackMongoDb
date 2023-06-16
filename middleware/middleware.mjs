@@ -1,7 +1,7 @@
 import Jwt  from "jsonwebtoken";
 import { SECRET } from "../config/config.mjs";
 import User from "../model/user_model.mjs";
-import { json } from "express";
+
 const verificar = async (req, res, next) => {
  try {
     

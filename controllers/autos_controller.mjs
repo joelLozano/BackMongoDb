@@ -8,7 +8,7 @@ const showAutos = (req, res) => {
     consulta.exec()
     .then((autos) => {
        // res.json(autos)
-        res.render('index', {autos})
+        res.render('showcars', {autos})
     })
     .catch((error) => {
         res.json({'message': error})

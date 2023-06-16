@@ -1,10 +1,11 @@
 import { Router} from 'express';
-import { createUser, login } from '../controllers/user_controller.mjs';
+import {loginview, createUser, login } from '../controllers/user_controller.mjs';
 const router = Router()
 
 
 router.post('/createUser', createUser)
-router.get('/login', login)
+router.get('/', loginview)
+router.post('/login', login)
 
 
 export default router

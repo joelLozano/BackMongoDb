@@ -3,6 +3,10 @@ import User from "../model/user_model.mjs";
 import { encryptPassword, comparePassword } from "../model/user_model.mjs";
 import { SECRET } from "../config/config.mjs";
 
+const loginview = (req, res) =>{
+    res.render('index')
+}
+
 const createUser = async (req, res) => {
     const { username, email, password, nombre,apePaterno, rol } = req.body
 
@@ -26,9 +30,11 @@ const createUser = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    // buscar el usuario en BD
+     // buscar el usuario en BD
     const userFound = await User.findOne({email: req.body.email})
-    if (!userFound) return res.status(401).json({message: 'user not found'})
+    //if (!userFound) return res.status(401).json({message: 'user not found'})
+    let error = { message:'user not found'}
+    if (!userFound) return res.render("404error", {error})
 
     // comparar el password 
 
@@ -39,8 +45,8 @@ const login = async (req, res) => {
     const token = Jwt.sign({id: userFound._id}, SECRET, {
         expiresIn: 50000
     })
-
-    res.json({token})
+    res.redirect('/catalogo/autos/')
+   // res.json({token})
 }
 
-export {createUser, login}
+export {loginview, createUser, login}

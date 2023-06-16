@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div>
+        <h1>Lista de ddautos</h1>
+    </div>
+
+    <div class="container">
+      <div class="row">
+          <% for (let i = 0; i < autos.length; i++) { %>
+
+           
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <img src="https://prestige-rentals.com.au/wp-content/uploads/2022/08/McLaren-600LT-Car-Hire-Melbourne-01.jpg" class="card-img-top" alt="Imagen">
+            <div class="card-body">
+              <h5 class="card-title"><%= autos[i].make %></h5>
+              <p class="card-text"><%= autos[i].model %></p>
+              <p class="card-text"><%= autos[i].version %></p>
+              <p class="card-text"><%= autos[i].price %></p>
+            </div>
+          </div>
+        </div>
+        <% } %>
+        <!-- Agrega más columnas y cards aquí -->
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
