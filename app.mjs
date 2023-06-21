@@ -1,6 +1,6 @@
 import express from'express'
 import {execute} from'./config/bd.mjs'
-import { autosRoute, usersRoutes, makesRoutes, chatRoute} from'./routes/index.mjs'
+import { autosRoute, usersRoutes, makesRoutes} from'./routes/index.mjs'
 import bodyParser from'body-parser'
 
 var app = express()
@@ -10,7 +10,7 @@ app.use(express.json())
 
 app.use('/catalogo/autos/',autosRoute)
 app.use('/catalogo/marcas',makesRoutes)
-app.use('/chat',chatRoute)
+//app.use('/chat',chatRoute)
 app.use(usersRoutes)
 
 app.set('view engine', 'ejs') // indicamos que lanzara una vista con ejs

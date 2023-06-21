@@ -19,11 +19,10 @@ const user = new Schema ({
     password: String,
     nombre: String,
     apePaterno: String,
-    rol: {
-        type: String,
-        enum: ['user', 'admin', 'cliente'],
-        default: 'cliente'
-    }
+    rol:[ {
+        ref: "Role",
+        type: Schema.Types.ObjectId
+    }]
 })
 
 export const encryptPassword = async (password) => {
