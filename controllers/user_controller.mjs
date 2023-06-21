@@ -7,6 +7,23 @@ const loginview = (req, res) =>{
     res.render('index')
 }
 
+const userRegister = async (req, res ) => {
+    const { username, email, password, nombre, apePaterno, } = req.body
+
+    const newUser = new User({
+        username,
+        email,
+        password: await encryptPassword(password),
+        nombre,
+        apePaterno
+    })
+
+    // comprobar si mandan un rol
+    
+}
+
+
+// controller para regustrar usuarios como administrador
 const createUser = async (req, res) => {
     const { username, email, password, nombre,apePaterno, rol } = req.body
 
