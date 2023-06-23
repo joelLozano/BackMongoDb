@@ -1,14 +1,19 @@
 //const AutosModel = require('../model/auto_model')
 import autosModel from'../model/auto_model.mjs'
 import makeModel from '../model/make_model.mjs'
+import aws from'aws-sdk'
+import multer from 'multer';
+import multerS3 from 'multer-s3'
+
+import 'dotenv/config'
 
 const showAutos = (req, res) => {
     const consulta = autosModel.find({});
 
     consulta.exec()
     .then((autos) => {
-       // res.json(autos)
-        res.render('showcars', {autos})
+       res.json(autos)
+        //res.render('showcars', {autos})
     })
     .catch((error) => {
         res.json({'message': error})
@@ -28,8 +33,38 @@ const showAuto = (req, res) => {
     })
 };
 
+// Configuracion de mi bucket 
+aws.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION
+})
+
+const s3 = new aws.S3();
+
+const upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: process.env.AWS_BUCKET_NAME,
+        acl: 'public-read',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        metadata: function (req, file, cb) {
+            cb(null, {fieldName: file.originalname})
+        },
+        key: function (req, file, cb) {
+            cb(null, file.originalname)
+        }
+    })
+})
+
+const formAuto = (req, res) => {
+    res.render('addcar');
+}
+
 const addAuto = async (req, res) => {
-    const { make, model, version, price, imagen } = req.body;
+    const { make, model, version, price } = req.body;
+    const imagen = req.file.location
+
     const makeObj = await makeModel.findById({_id: make});
 
     if (!makeObj) return res.status(400).json({ error: 'Make no encontrado' });
@@ -86,4 +121,4 @@ const updateCar = (req, res) => {
     })
 };
 
-export { showAutos ,showAuto, addAuto, updateCar, deleteAuto ,deleteAutoV2 }
+export { showAutos ,showAuto, addAuto, updateCar, deleteAuto ,deleteAutoV2,formAuto, upload }

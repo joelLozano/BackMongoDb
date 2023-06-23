@@ -2,13 +2,14 @@ import Jwt from "jsonwebtoken";
 import User from "../model/user_model.mjs";
 import { encryptPassword, comparePassword } from "../model/user_model.mjs";
 import { SECRET } from "../config/config.mjs";
+import RoleModel from "../model/roles_model.mjs"
 
 const loginview = (req, res) =>{
     res.render('index')
 }
 
 const userRegister = async (req, res ) => {
-    const { username, email, password, nombre, apePaterno, } = req.body
+    const { username, email, password, nombre, apePaterno, roles} = req.body
 
     const newUser = new User({
         username,
@@ -19,7 +20,18 @@ const userRegister = async (req, res ) => {
     })
 
     // comprobar si mandan un rol
-    
+    if( roles) {
+        const foundRole = await RoleModel.find({name: {$in: roles} })
+        newUser.roles = foundRole.map (role => role._id)
+    } else {
+        const role = await RoleModel.findOne({name: 'user'})
+        newUser.roles = [role._id]
+    }
+    const saveUser = await newUser.save()
+    const token = Jwt.sign({id: saveUser._id}, SECRET, {
+        expiresIn: 50000
+    })
+    res.json({token})
 }
 
 
@@ -51,7 +63,8 @@ const login = async (req, res) => {
     const userFound = await User.findOne({email: req.body.email})
     //if (!userFound) return res.status(401).json({message: 'user not found'})
     let error = { message:'user not found'}
-    if (!userFound) return res.render("404error", {error})
+    if (!userFound) return res.status(400).json({message: "user not found"})
+    //res.render("404error", {error})
 
     // comparar el password 
 
@@ -62,8 +75,8 @@ const login = async (req, res) => {
     const token = Jwt.sign({id: userFound._id}, SECRET, {
         expiresIn: 50000
     })
-    res.redirect('/catalogo/autos/')
-   // res.json({token})
+    //res.redirect('/catalogo/autos/')
+    res.json({token})
 }
 
 export {loginview, createUser, login}

@@ -2,11 +2,20 @@ import express from'express'
 import {execute} from'./config/bd.mjs'
 import { autosRoute, usersRoutes, makesRoutes} from'./routes/index.mjs'
 import bodyParser from'body-parser'
+import cors from 'cors';
+
+const corsOptions = {
+    origin: 'http://localhost:5173', // Orígenes permitidos, puede ser un solo valor o un arreglo de valores
+    methods: ['GET', 'POST'], // Métodos HTTP permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+  };
 
 var app = express()
+app.use(cors())
 app.use(bodyParser.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.use(cors(corsOptions))
 
 app.use('/catalogo/autos/',autosRoute)
 app.use('/catalogo/marcas',makesRoutes)
