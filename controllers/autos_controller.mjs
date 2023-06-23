@@ -8,12 +8,12 @@ import multerS3 from 'multer-s3'
 import 'dotenv/config'
 
 const showAutos = (req, res) => {
-    const consulta = autosModel.find({});
+    const consulta = autosModel.find({}).populate('make');
 
     consulta.exec()
     .then((autos) => {
        res.json(autos)
-        //res.render('showcars', {autos})
+       // res.render('showcars', {autos})
     })
     .catch((error) => {
         res.json({'message': error})
@@ -57,8 +57,10 @@ const upload = multer({
     })
 })
 
-const formAuto = (req, res) => {
-    res.render('addcar');
+// muestra la vista del fomulario. 
+const formAuto = async (req, res) => {
+    const brands = await makeModel.find({});
+    res.render('addcar',{brands} );
 }
 
 const addAuto = async (req, res) => {

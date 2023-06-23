@@ -3,6 +3,8 @@ import {execute} from'./config/bd.mjs'
 import { autosRoute, usersRoutes, makesRoutes} from'./routes/index.mjs'
 import bodyParser from'body-parser'
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
 const corsOptions = {
     origin: 'http://localhost:5173', // Orígenes permitidos, puede ser un solo valor o un arreglo de valores
@@ -12,10 +14,16 @@ const corsOptions = {
 
 var app = express()
 app.use(cors())
+app.use(cors(corsOptions))
+
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended: true}))
+
 app.use(bodyParser.json())
+
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.use(cors(corsOptions))
+
 
 app.use('/catalogo/autos/',autosRoute)
 app.use('/catalogo/marcas',makesRoutes)

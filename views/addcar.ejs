@@ -17,6 +17,15 @@
 
             <form action="/catalogo/autos/addcar" enctype="multipart/form-data" method="POST">
               <div class="form-group">
+                <label for="">marca</label>
+                <select name="make" id="">
+                    <% for (let i = 0; i < brands.length; i++) { %>
+                    <option value="<%= brands[i]._id %>"><%= brands[i].make %></option>
+                    <% } %>
+                </select>
+                <input type="text" name="model" placeholder="model">
+                <input type="text" name="version" placeholder="version">
+                <input type="text" name="price" placeholder="price">
                 <label for="image">imagen:</label>
                 <input type="file" class="form-control" id="image" name="image" placeholder="imagen">
               </div>

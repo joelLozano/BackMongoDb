@@ -60,6 +60,7 @@ const createUser = async (req, res) => {
 
 const login = async (req, res) => {
      // buscar el usuario en BD
+     console.log("......");
     const userFound = await User.findOne({email: req.body.email})
     //if (!userFound) return res.status(401).json({message: 'user not found'})
     let error = { message:'user not found'}

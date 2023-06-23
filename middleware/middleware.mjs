@@ -24,4 +24,13 @@ const verificar = async (req, res, next) => {
  }
 }
 
-export default verificar 
+const validateSession = (res, req, next) => {
+   //  Verificar si la session y la cookie existe 
+   if ( req.session.loggedIn && req.cookie.username ) {
+      next()
+   } else {
+      res.status(400).json({message: "session expirada"})
+   }
+}
+
+export default {verificar, validateSession} 
