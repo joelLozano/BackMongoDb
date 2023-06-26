@@ -4,7 +4,7 @@ import verificar from '../middleware/middleware.mjs';
 
 const route = Router() 
 
-route.get('/getMakes', verificar, makeCaddMakeontroller.showMakes)
+route.get('/getMakes', makeCaddMakeontroller.showMakes)
 route.post('/postMakes', makeCaddMakeontroller.addMake)
 //route.delete('/deleteMakes', makeCaddMakeontroller.addMake)
 

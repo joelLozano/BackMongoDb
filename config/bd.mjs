@@ -1,14 +1,17 @@
 import mongoose from 'mongoose'
+import dotenv from 'dotenv';
+dotenv.config();
 
-const uri = "mongodb+srv://lozanojoel35:Admin1234@cluster0.pdspawj.mongodb.net/AutosDB"
 
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.pdspawj.mongodb.net/AutosDB`
+console.log(uri)
 const options = {
     autoIndex: true,
     serverSelectionTimeoutMS: 5000,
 }
 
 const execute = () => {
-    mongoose.connect(uri,options)
+    mongoose.connect(uri ,options)
 .then(() => {
     console.log('Conexion ok')
 })

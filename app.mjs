@@ -4,7 +4,6 @@ import { autosRoute, usersRoutes, makesRoutes} from'./routes/index.mjs'
 import bodyParser from'body-parser'
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
 
 const corsOptions = {
     origin: 'http://localhost:5173', // Orígenes permitidos, puede ser un solo valor o un arreglo de valores
@@ -35,5 +34,5 @@ app.set('view engine', 'ejs') // indicamos que lanzara una vista con ejs
 
 execute()
 app.listen(3000, () => {
-    console.log("El servidor esta corriendo en el 3000")
+    console.log("El servidor esta corriendo en el 3000 🚀")
 })
