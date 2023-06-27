@@ -35,9 +35,9 @@ const showAuto = (req, res) => {
 
 // Configuracion de mi bucket 
 aws.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
+    accessKeyId: process.env.ACCESS_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.ACCESS_AWS_SECRET_ACCESS_KEY,
+    region: process.env.ACCESS_AWS_REGION
 })
 
 const s3 = new aws.S3();
