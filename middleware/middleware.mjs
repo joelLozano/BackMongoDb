@@ -1,5 +1,4 @@
 import Jwt  from "jsonwebtoken";
-import { SECRET } from "../config/config.mjs";
 import User from "../model/user_model.mjs";
 
 const verificar = async (req, res, next) => {
@@ -9,7 +8,7 @@ const verificar = async (req, res, next) => {
     if (!token) return res.status(403).json({message: ' no hay token'})
 
     // jwt Verificar el token
-    const decoded = Jwt.verify(token, SECRET)
+    const decoded = Jwt.verify(token, process.env.SECRET)
     console.log(decoded.id)
 
     // crear una consulta por ID 

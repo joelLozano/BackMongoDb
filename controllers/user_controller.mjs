@@ -1,8 +1,8 @@
 import Jwt from "jsonwebtoken";
 import User from "../model/user_model.mjs";
 import { encryptPassword, comparePassword } from "../model/user_model.mjs";
-import { SECRET } from "../config/config.mjs";
 import RoleModel from "../model/roles_model.mjs"
+import 'dotenv/config'
 
 const loginview = (req, res) =>{
     res.render('index')
@@ -28,7 +28,7 @@ const userRegister = async (req, res ) => {
         newUser.roles = [role._id]
     }
     const saveUser = await newUser.save()
-    const token = Jwt.sign({id: saveUser._id}, SECRET, {
+    const token = Jwt.sign({id: saveUser._id}, process.env.SECRET, {
         expiresIn: 50000
     })
     res.json({token})
@@ -50,7 +50,7 @@ const createUser = async (req, res) => {
 
     const saveuser =  await newUser.save()
 
-    const token = Jwt.sign({id: saveuser._id}, SECRET, {
+    const token = Jwt.sign({id: saveuser._id}, process.env.SECRET, {
         expiresIn: 50000
     })
 
@@ -73,7 +73,7 @@ const login = async (req, res) => {
     if (!passwordCompare) return res.status(401).json({message: 'invalid password'})
 
     // Generar un Token 
-    const token = Jwt.sign({id: userFound._id}, SECRET, {
+    const token = Jwt.sign({id: userFound._id}, process.env.SECRET, {
         expiresIn: 50000
     })
     //res.redirect('/catalogo/autos/')
