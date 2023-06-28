@@ -36,3 +36,6 @@ execute()
 app.listen(3000, () => {
     console.log("El servidor esta corriendo en el 3000 🚀")
 })
+
+
+export default app

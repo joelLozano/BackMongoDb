@@ -8,16 +8,17 @@ import multerS3 from 'multer-s3'
 import 'dotenv/config'
 
 const showAutos = (req, res) => {
-    const consulta = autosModel.find({}).populate('make');
+    // const consulta = autosModel.find({}).populate('make');
 
-    consulta.exec()
-    .then((autos) => {
-       res.json(autos)
-       // res.render('showcars', {autos})
-    })
-    .catch((error) => {
-        res.json({'message': error})
-    })
+    // consulta.exec()
+    // .then((autos) => {
+    //    res.status(200).json(autos)
+    //    // res.render('showcars', {autos})
+    // })
+    // .catch((error) => {
+    //     res.json({'message': error})
+    // })
+    res.status(200)
 };
 
 const showAuto = (req, res) => {
