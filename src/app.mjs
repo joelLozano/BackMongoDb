@@ -1,9 +1,9 @@
 import express from'express'
 import {execute} from'./config/bd.mjs'
-import { autosRoute, usersRoutes, makesRoutes} from'./routes/index.mjs'
 import bodyParser from'body-parser'
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import { autosRoute, makesRoutes, usersRoutes } from './routes/index.mjs';
 
 const corsOptions = {
     origin: 'http://localhost:5173', // Orígenes permitidos, puede ser un solo valor o un arreglo de valores
@@ -30,7 +30,7 @@ app.use('/catalogo/marcas',makesRoutes)
 app.use(usersRoutes)
 
 app.set('view engine', 'ejs') // indicamos que lanzara una vista con ejs
-//app.set("views", "./src/views") // indicamos la ruta de las vistas
+app.set("views", "./src/views") // indicamos la ruta de las vistas
 
 execute()
 app.listen(3000, () => {

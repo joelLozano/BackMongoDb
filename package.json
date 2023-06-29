@@ -5,9 +5,9 @@
   "main": "app.mjs",
   "scripts": {
     "test": "jest",
-    "build": "npm run compile && npm run generate-assets",
-    "dev": "nodemon app.mjs",
-    "start": "node app.mjs"
+     "build": "babel src/app.mjs --out-dir build",
+    "dev": "nodemon src/app.mjs",
+     "start": "node build/app.mjs"
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +35,8 @@
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
     "@jest/globals": "^29.5.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "@babel/cli": "^7.21.5",
+    "@babel/node": "^7.22.1"
   }
 }

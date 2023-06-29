@@ -1,5 +1,5 @@
 import  request from'supertest'
-import app from'../app.mjs'
+import app from'../src/app.mjs'
 
 
 //const  {showAutos}  = require('../controllers/autos_controller.mjs');
